@@ -13,6 +13,7 @@ class Login extends Component {
       thing: null,
       sessionID: "",
       latestData: "",
+      pm2Data: "",
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,6 +25,7 @@ class Login extends Component {
     this.getTriggers = this.getTriggers.bind(this);
     this.getProblems = this.getProblems.bind(this);
     this.refresh = this.refresh.bind(this);
+    this.getPM2 = this.getPM2.bind(this);
   }
 
   componentDidMount() {}
@@ -58,6 +60,7 @@ class Login extends Component {
   }
 
   async getHosts() {
+    this.setState({ pm2Data: null });
     const sessionData = {
       sessionID: this.state.sessionID,
     };
@@ -70,6 +73,7 @@ class Login extends Component {
   }
 
   async getProblems() {
+    this.setState({ pm2Data: null });
     const sessionData = {
       sessionID: this.state.sessionID,
     };
@@ -82,6 +86,7 @@ class Login extends Component {
   }
 
   async getTriggers() {
+    this.setState({ pm2Data: null });
     const sessionData = {
       sessionID: this.state.sessionID,
     };
@@ -94,6 +99,7 @@ class Login extends Component {
   }
 
   async getPing() {
+    this.setState({ pm2Data: null });
     const sessionData = {
       sessionID: this.state.sessionID,
     };
@@ -106,6 +112,7 @@ class Login extends Component {
   }
 
   async getAlerts() {
+    this.setState({ pm2Data: null });
     const sessionData = {
       sessionID: this.state.sessionID,
     };
@@ -117,6 +124,14 @@ class Login extends Component {
     });
   }
 
+  async getPM2() {
+    this.setState({ latestData: null });
+    await axios.get("/getPM2").then((res) => {
+      console.log(res.data);
+      this.setState({ pm2Data: JSON.stringify(res.data) });
+    });
+  }
+
   refresh() {
     window.location.reload(false);
   }
@@ -124,7 +139,8 @@ class Login extends Component {
   render() {
     const ifSessionID = () => {
       if (this.state.sessionID !== "") {
-        return <div>session ID: {this.state.sessionID}</div>;
+        // return <div>session ID: {this.state.sessionID}</div>;
+        console.log("session ID:", this.state.sessionID);
       }
     };
 
@@ -149,14 +165,20 @@ class Login extends Component {
             </button>
 
             <button className="btn btn-primary bt" onClick={this.getPing}>
-              Run Ping
+              Ping Server
             </button>
-            <div id="dataReturn">{this.state.latestData}</div>
-            <br />
 
-            <button className="btn btn-danger bt" onClick={this.refresh}>
-              Logout
+            <button className="btn btn-primary bt" onClick={this.getPM2}>
+              Get PM2 Data
             </button>
+            <br />
+            <div id="dataReturn">{this.state.latestData}</div>
+
+            <div id="dataReturn">{this.state.pm2Data}</div>
+
+            {/* <button className="btn btn-danger bt" onClick={this.refresh}>
+              Logout
+            </button> */}
           </>
         );
       } else {
@@ -200,17 +222,25 @@ class Login extends Component {
     };
 
     return (
-      <div className="container">
-        <div>
-          <br></br>
-          {loginForm()}
-          <br></br>
-          {ifSessionID()}
-          <br />
-          {renderAuthButton()} <br />
-          <br></br>
+      <>
+        <div id="container">
+          <div>
+            <br></br>
+            {loginForm()}
+            <br></br>
+            {ifSessionID()}
+            <br />
+            {renderAuthButton()} <br />
+            <br></br>
+          </div>
+          <iframe
+            title="frame"
+            id="frame"
+            src="https://app.pm2.io/bucket/620c29dcf4a2ce1b3e32890d/backend/overview/servers"
+            frameborder="0"
+          ></iframe>
         </div>
-      </div>
+      </>
     );
   }
 }

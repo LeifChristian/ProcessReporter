@@ -3,6 +3,7 @@ var router = express.Router();
 var axios = require("axios");
 const app = express();
 const cors = require("cors");
+const pm2 = require("pm2");
 const corsOpts = {
   origin: "*",
   credentials: true,
@@ -230,6 +231,39 @@ router.post("/getProblems", (req, res) => {
     .catch(function (error) {
       console.log(error);
     });
+});
+
+router.get("/getPM2", async (req, res) => {
+  pm2.connect(function (err) {
+    pm2.list((err, list) => {
+      console.log(err);
+      // console.log(err, list);
+      // console.log(list[0].monit);
+      // console.log(list[0].pm_id);
+      // console.log(list[0].pm2_env);
+
+      // console.log(list[0].pm2_env);
+      // console.log(list[0].pm2_env.created_at);
+      // console.log(list[0].pm2_env.pm_uptime);
+
+      console.log(list);
+
+      let response = [];
+
+      for (let i in list) {
+        let item = {
+          process_ID: list[i].pid,
+          createdAt: list[i].pm2_env.created_at,
+          uptime: list[i].pm2_env.pm_uptime,
+          status: list[i].node_version,
+          status2: list[i].pm2_env.status,
+        };
+        response.push(item);
+      }
+
+      res.send(response);
+    });
+  });
 });
 
 module.exports = router;
