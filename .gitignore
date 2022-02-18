@@ -3,6 +3,10 @@
 # dependencies
 /node_modules
 /frontend/node_modules
+token.json
+/backend/gmailAPI/token.json
+credentials.json
+/backend/gmailAPI/credentials.json
 
 /.pnp
 .pnp.js

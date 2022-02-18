@@ -12,8 +12,11 @@ class Login extends Component {
       isLoggedIn: false,
       thing: null,
       sessionID: "",
-      latestData: "",
-      pm2Data: "",
+      latestData: null,
+      pm2Data: null,
+      value: "Admin",
+      value1: "zabbix",
+      enteredNumber: null,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,12 +29,18 @@ class Login extends Component {
     this.getProblems = this.getProblems.bind(this);
     this.refresh = this.refresh.bind(this);
     this.getPM2 = this.getPM2.bind(this);
+    this.sendText = this.sendText.bind(this);
+    this.sendEmail = this.sendEmail.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    // this.setState({ value: "Admin", value1: "zabbix" });
+    // alert(this.state.value, this.state.value1);
+    this.handleSubmit();
+  }
 
   async handleSubmit(event) {
-    event.preventDefault();
+    event?.preventDefault();
 
     const userData = {
       username: this.state.value,
@@ -99,6 +108,7 @@ class Login extends Component {
   }
 
   async getPing() {
+    this.setState({ latestData: "" });
     this.setState({ pm2Data: null });
     const sessionData = {
       sessionID: this.state.sessionID,
@@ -134,6 +144,60 @@ class Login extends Component {
 
   refresh() {
     window.location.reload(false);
+  }
+
+  async sendText() {
+    let theStuff;
+
+    if (!this.state.latestData && !this.state.pm2Data) {
+      alert("no data");
+      return;
+    }
+
+    this.state.latestData ? (theStuff = this.state.latestData) : console.log();
+
+    this.state.pm2Data ? (theStuff = this.state.pm2Data) : console.log();
+
+    const enteredNumber = prompt("Enter number including area code");
+
+    this.setState({ enteredNumber: enteredNumber });
+
+    if (enteredNumber.length !== 10) {
+      alert("invalid phone number");
+      return;
+    } else {
+      console.log();
+    }
+
+    const userData = {
+      Data: `SERVER STATUS UPDATE: ${theStuff}`,
+      Number: this.state.enteredNumber
+        ? `+1${this.state.enteredNumber}`
+        : "+14065390742",
+    };
+
+    await axios.post("/sendText", userData).then((response) => {
+      console.log(response);
+    });
+  }
+
+  async sendEmail() {
+    let theStuff;
+
+    if (!this.state.latestData && !this.state.pm2Data) {
+      alert("no data");
+      return;
+    }
+
+    this.state.latestData ? (theStuff = this.state.latestData) : console.log();
+    this.state.pm2Data ? (theStuff = this.state.pm2Data) : console.log();
+
+    const enteredEmail = prompt("Enter email");
+    const userData = { Data: theStuff, Email: enteredEmail };
+
+    await axios.post("/sendEmail", userData).then((response) => {
+      console.log(response);
+    });
   }
 
   render() {
@@ -172,13 +236,41 @@ class Login extends Component {
               Get PM2 Data
             </button>
             <br />
-            <div id="dataReturn">{this.state.latestData}</div>
+            <br />
+            <div id="dataReturn">
+              {this.state.latestData === "[]"
+                ? this.setState({ latestData: "none" })
+                : ""}
+              {this.state.latestData
+                ? this.state.latestData
+                    .replaceAll("[", "")
+                    .replaceAll("]", "")
+                    .replaceAll("{", "")
+                    .replaceAll("}", "")
+                    .replaceAll(",", " | ")
+                    .replaceAll('"', " ")
+                : ""}
+            </div>
 
-            <div id="dataReturn">{this.state.pm2Data}</div>
+            <div id="dataReturn">
+              {this.state.pm2Data
+                ? this.state.pm2Data
+                    .replaceAll("[", "")
+                    .replaceAll("]", "")
+                    .replaceAll("{", "")
+                    .replaceAll("}", "")
+                    .replaceAll(",", " | ")
+                    .replaceAll('"', " ")
+                : ""}
+            </div>
 
-            {/* <button className="btn btn-danger bt" onClick={this.refresh}>
-              Logout
-            </button> */}
+            <button className="btn btn-danger bt" onClick={this.sendText}>
+              Send Text
+            </button>
+
+            <button className="btn btn-danger bt" onClick={this.sendEmail}>
+              Send Email
+            </button>
           </>
         );
       } else {
@@ -223,22 +315,25 @@ class Login extends Component {
 
     return (
       <>
-        <div id="container">
-          <div>
-            <br></br>
-            {loginForm()}
-            <br></br>
-            {ifSessionID()}
-            <br />
-            {renderAuthButton()} <br />
-            <br></br>
+        <div>
+          <div id="container">
+            <iframe
+              title="frame"
+              id="frame"
+              src="https://app.pm2.io/bucket/620c29dcf4a2ce1b3e32890d/backend/overview/servers"
+              frameborder="0"
+            ></iframe>
+            <div id="content">
+              <br />
+              <br />
+              <h3>Zabbix / PM2 Dashboard</h3>
+              {/* {loginForm()} */}
+              {ifSessionID()}
+              <br />
+              {renderAuthButton()} <br />
+              <br></br>
+            </div>
           </div>
-          <iframe
-            title="frame"
-            id="frame"
-            src="https://app.pm2.io/bucket/620c29dcf4a2ce1b3e32890d/backend/overview/servers"
-            frameborder="0"
-          ></iframe>
         </div>
       </>
     );
