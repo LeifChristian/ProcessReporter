@@ -1,70 +1,131 @@
-# Getting Started with Create React App
+# PM2 Remote API with Zabbix and Ping
+Start, stop, restart and get Pm2 info from any system remotely. 
+Also includes zabbix watcher and problem reporter, and a route to ping any server.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# What is it?
 
-## Available Scripts
+An express server with API routes and functions designed to trigger those routes,
+either locally or from a remote machine.
 
-In the project directory, you can run:
+Routes trigger calls to PM2 and Zabbix processes, and can be triggered from either the localhost machine or a remote location, assuming ports are accessible and permissions granted. A ping route is included to allow
+any server address sent as a param to be ping'd.
 
-### `npm start`
+# To Run:
+npm or yarn install.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Nodemon server-POST.js  -- (node works, nodemon preferred).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Can be started as a Pm2 process, but triggering the stop route via the API will stop the app! Lol.
 
-### `npm test`
+Routes are served on port 3800, all routes are contained within server-POST.js
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`PM2_API - POST setup.json` contains the postman routes collection. Routes live online 
+in the company postman collection.
 
-### `npm run build`
+# Functionality:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+/pm2Auth - Get entire PM2 object containing all Pm2 data from the host computer.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+/pm2GetProcesses - Get all processes available through Pm2. Returns running, errored and stopped processes.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+/restart/:id - Restart a process by it's Pm2 Id. Can start and stop processes from a remote machine.
 
-### `npm run eject`
+/getStoppedProcess - Returns all processes in a stopped or errored state
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+/stopProcess/:id - Stop a process by it's Pm2 Id. Use with caution!
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+/loginZabbix - logs into Zabbix and returns the full zabbix object.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+/getProblems - get all problems reported by zabbix
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+/sendPingGeneric - Ping any server sent as the request param "server"
 
-## Learn More
+# GET vs POST
+The current setup uses POST routes, though GET routes are included.
+See `.env variables` section for current param setup
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    **GET routes might need some updating to reflect recent updates**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# ProcessReporter.js
+Autoresponder that monitors PM2 processes and reports if a process is stopped or errored. 
+Reporter is currently set up to send an email thru the Gmail API, when a new process is stopped or errored.
 
-### Code Splitting
+The Gmail API uses token.json and credentials.json to authenticate. 
+The included "sendEmail" function is from Gmail's documentation, and currently sends text information about recently stopped or errored processes. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+View documentation - https://developers.google.com/gmail/api/quickstart/nodejs
 
-### Analyzing the Bundle Size
+** This could be easily adapted to use Microsoft email services**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# pm2GetRemote.js
+Simple function that gets all pm2 data from a remote machine where server-POST.js is running. 
+It is called via http://domain-or-ip.address/pm2Auth:3800/
+This function POSTS to /pm2Auth route. Use this to monitor any Pm2 data from a remote machine.
+Includes an interval variable to select desired "watch" length.
 
-### Making a Progressive Web App
+# ProbemsReporter.js
+This function gets problems from Zabbix agent and sends an email with any new problems, on a set interval.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+# compareArraysofObjects.js
+Handy little function that compares objects inside of arrays.
 
-### Advanced Configuration
+# findDuplicateObjectInArray.js
+Find duplicate objects within the same array.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+# .env Variable
 
-### Deployment
+The .env file contains hard coded strings which correspond to route params.
+It's a simple auth system for dev purposes, any requests to these servers are rejected outside of the company VPN.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The PASSWORD environment variable is a simple hashed string (P@ssw0rd), and is accessed via ${process.env.PASSWORD}
+The same .env file lives on both the server and the local machine. If the passwords match, the route is triggered.
 
-### `npm run build` fails to minify
+The POST routes send "password": "b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342".
+The password is passed in the request body (P@ssw0rd with a SHA256 hash), and is stored in the .env file on both the local and remote machines.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# /localhost-functions
+Functions in this directory trigger routes on the same machine
+
+# /remote-functions
+Functions in this directory trigger routes remotely (from a separate machine). 
+Currently using dev server at 10.0.0.174.
+
+# Twilio API
+Twilio API is included with this build, though currently unused. Easily send text or voice notifications. Just add your account SID and token in the .env file. 
+
+Bring in twilio with:
+const client = require("twilio")(accountSid, authToken);
+
+Add your SID and token:
+const accountSid = process.env.MY_ACCT_SID
+const authToken = process.env.MY_TOKEN
+
+Create a voice call with:
+client.calls.create({
+  twiml: `<Response><Pause length="1"/><Say voice="woman"> ${message}</Say></Response>`,
+  to: "+14065390742",
+  from: "+14062154416",
+})
+.then((call) => console.log(call.sid));
+
+Create a text message with:
+client.messages
+.create({
+    body: message,
+    messagingServiceSid: "MG6a6e4c67fd4bc51cec5f8e1223cad360",
+    to: "+14065390742",
+})
+.then((message) => console.log(message.sid))
+.done();
+
+# Enjoy!
+
+                    ░░▒█░░░░█▀▀░░▀░░█▀▀░░░
+                    ░░▒█░░░░█▀▀░░█▀░█▀░░░░
+                    ░░▒█▄▄█░▀▀▀░▀▀▀░▀░░░░░
+                          
+
+
+
+
+
