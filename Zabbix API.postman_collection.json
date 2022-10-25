@@ -1,0 +1,498 @@
+{
+	"info": {
+		"_postman_id": "0324a725-7270-4edd-8d85-2c512c1689e8",
+		"name": "Zabbix API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LOGIN USER",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"user.login\",\r\n    \"params\": {\r\n        \"username\": \"Admin\",\r\n        \"password\": \"zabbix\",\r\n        \"userData\": true\r\n    },\r\n    \"id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zabbix.unitedlocating.net/api_jsonrpc.php",
+					"protocol": "https",
+					"host": [
+						"zabbix",
+						"unitedlocating",
+						"net"
+					],
+					"path": [
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL HOSTS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"host.get\",\r\n    \"params\": {\r\n        \"output\": [\r\n            \"hostid\",\r\n            \"host\"\r\n        ],\r\n        \"selectInterfaces\": [\r\n            \"interfaceid\",\r\n            \"ip\"\r\n        ]\r\n    },\r\n    \"id\": 2,\r\n    \"auth\": \"feddab2dfbf4d30b63b1383def84b6d1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zabbix.unitedlocating.net/api_jsonrpc.php",
+					"protocol": "https",
+					"host": [
+						"zabbix",
+						"unitedlocating",
+						"net"
+					],
+					"path": [
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET DISCOVERED HOSTS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"dhost.get\",\r\n    \"params\": {\r\n        \"output\": [\r\n            \"hostid\",\r\n            \"host\"\r\n        ],\r\n        \"selectInterfaces\": [\r\n            \"interfaceid\",\r\n            \"ip\"\r\n        ]\r\n    },\r\n    \"id\": 2,\r\n    \"auth\": \"feddab2dfbf4d30b63b1383def84b6d1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zabbix.unitedlocating.net/api_jsonrpc.php",
+					"protocol": "https",
+					"host": [
+						"zabbix",
+						"unitedlocating",
+						"net"
+					],
+					"path": [
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET TRIGGERS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"trigger.get\",\r\n    \"params\": {\r\n        \"output\": [\r\n            \"triggerid\",\r\n            \"description\",\r\n            \"priority\"\r\n        ],\r\n        \"filter\": {\r\n            \"value\": 1\r\n        },\r\n        \"sortfield\": \"priority\",\r\n        \"sortorder\": \"DESC\"\r\n    },\r\n    \"auth\": \"feddab2dfbf4d30b63b1383def84b6d1\",\r\n    \"id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zabbix.unitedlocating.net/api_jsonrpc.php",
+					"protocol": "https",
+					"host": [
+						"zabbix",
+						"unitedlocating",
+						"net"
+					],
+					"path": [
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET SPECIFIC HOST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"host.get\",\r\n    \"params\": {\r\n        \"filter\": {\r\n            \"host\": \"ito-git.spcph.local\"\r\n        },\r\n        \"output\": [\r\n            \"hostid\",\r\n            \"host\"\r\n        ],\r\n        \"selectInterfaces\": [\r\n            \"interfaceid\",\r\n            \"ip\"\r\n        ]\r\n    },\r\n    \"id\": 2,\r\n    \"auth\": \"feddab2dfbf4d30b63b1383def84b6d1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zabbix.unitedlocating.net/api_jsonrpc.php",
+					"protocol": "https",
+					"host": [
+						"zabbix",
+						"unitedlocating",
+						"net"
+					],
+					"path": [
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL PROBLEMS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"jsonrpc\": \"2.0\",\r\n    \"method\": \"problem.get\",\r\n    \"params\": {\r\n        \"output\": \"extend\",\r\n        \"selectAcknowledges\": \"extend\",\r\n        \"selectTags\": \"extend\",\r\n        \"selectSuppressionData\": \"extend\",\r\n        \"recent\": \"true\",\r\n        \"sortfield\": [\"eventid\"],\r\n        \"sortorder\": \"DESC\",\r\n        \"acknowledged\": \"0\"\r\n    },\r\n    \"auth\": \"feddab2dfbf4d30b63b1383def84b6d1\",\r\n    \"id\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zabbix.unitedlocating.net/api_jsonrpc.php",
+					"protocol": "https",
+					"host": [
+						"zabbix",
+						"unitedlocating",
+						"net"
+					],
+					"path": [
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET PROBLEMS BY TIME",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"jsonrpc\": \"2.0\",\r\n    \"method\": \"problem.get\",\r\n    \"params\": {\r\n        \"output\": \"extend\",\r\n        \"selectAcknowledges\": \"extend\",\r\n        \"selectTags\": \"extend\",\r\n        \"selectSuppressionData\": \"extend\",\r\n        \"recent\": \"true\",\r\n        \"sortfield\": [\"eventid\"],\r\n        \"sortorder\": \"DESC\",\r\n        \"acknowledged\": \"0\",\r\n        \"time_from\": \"1627904100\"\r\n    },\r\n    \"auth\": \"d17a7912c6a54315dfdf950ad0577bc4\",\r\n    \"id\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zabbix.unitedlocating.net/api_jsonrpc.php",
+					"protocol": "https",
+					"host": [
+						"zabbix",
+						"unitedlocating",
+						"net"
+					],
+					"path": [
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET PROBLEM BY HOST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"jsonrpc\": \"2.0\",\r\n    \"method\": \"problem.get\",\r\n    \"params\": {\r\n        \"output\": \"extend\",\r\n        \"selectAcknowledges\": \"extend\",\r\n        \"selectTags\": \"extend\",\r\n        \"selectSuppressionData\": \"extend\",\r\n        \"recent\": \"true\",\r\n        \"sortfield\": [\"eventid\"],\r\n        \"sortorder\": \"DESC\",\r\n        \"acknowledged\": \"0\",\r\n        \"hostids\": \"10220\",\r\n        \"time_from\": \"1627904100\"\r\n    },\r\n    \"auth\": \"d17a7912c6a54315dfdf950ad0577bc4\",\r\n    \"id\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zabbix.unitedlocating.net/api_jsonrpc.php",
+					"protocol": "https",
+					"host": [
+						"zabbix",
+						"unitedlocating",
+						"net"
+					],
+					"path": [
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SEARCH HOST NAME CONTAINS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"host.get\",\r\n    \"params\": {\r\n        \"output\": [\"hostid\", \"host\"],\r\n        \"selectInterfaces\": [\"port\"],\r\n        \"filter\": {\r\n            \"port\": [\"10050\", \"10071\"]\r\n        },\r\n        \"search\": {\r\n            \"host\": \"*server*\"\r\n        },\r\n        \"searchWildcardsEnabled\": true,\r\n        \"searchByAny\": true,\r\n        \"sortfield\": \"host\",\r\n        \"sortorder\": \"DESC\",\r\n        \"limit\": 5\r\n    },\r\n    \"auth\": \"feddab2dfbf4d30b63b1383def84b6d1\",\r\n    \"id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zabbix.unitedlocating.net/api_jsonrpc.php",
+					"protocol": "https",
+					"host": [
+						"zabbix",
+						"unitedlocating",
+						"net"
+					],
+					"path": [
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL ALERTS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"alert.get\",\r\n    \"params\": {\r\n        \"output\": [\r\n            \"hostid\",\r\n            \"host\"\r\n        ],\r\n        \"selectInterfaces\": [\r\n            \"interfaceid\",\r\n            \"ip\"\r\n        ]\r\n    },\r\n    \"id\": 2,\r\n    \"auth\": \"feddab2dfbf4d30b63b1383def84b6d1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zabbix.unitedlocating.net/api_jsonrpc.php",
+					"protocol": "https",
+					"host": [
+						"zabbix",
+						"unitedlocating",
+						"net"
+					],
+					"path": [
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET DASHBOARD ALL",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"dashboard.get\",\r\n    \"params\": {\r\n        \"output\": \"extend\",\r\n        \"selectPages\": \"extend\",\r\n        \"selectUsers\": \"extend\",\r\n        \"selectUserGroups\": \"extend\",\r\n        \"dashboardids\": [\r\n            \"1\",\r\n            \"2\"\r\n        ]\r\n    },\r\n    \"auth\": \"feddab2dfbf4d30b63b1383def84b6d1\",\r\n    \"id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zabbix.unitedlocating.net/api_jsonrpc.php",
+					"protocol": "https",
+					"host": [
+						"zabbix",
+						"unitedlocating",
+						"net"
+					],
+					"path": [
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RUN PING SCRIPT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"script.execute\",\r\n    \"params\": {\r\n        \"scriptid\": \"1\",\r\n        \"hostid\": \"10084\"\r\n    },\r\n    \"auth\": \"feddab2dfbf4d30b63b1383def84b6d1\",\r\n    \"id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zabbix.unitedlocating.net/api_jsonrpc.php",
+					"protocol": "https",
+					"host": [
+						"zabbix",
+						"unitedlocating",
+						"net"
+					],
+					"path": [
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL SCRIPTS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"script.execute\",\r\n    \"params\": {\r\n        \"scriptid\": \"1\",\r\n        \"hostid\": \"10084\"\r\n    },\r\n    \"auth\": \"feddab2dfbf4d30b63b1383def84b6d1\",\r\n    \"id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zabbix.unitedlocating.net/api_jsonrpc.php",
+					"protocol": "https",
+					"host": [
+						"zabbix",
+						"unitedlocating",
+						"net"
+					],
+					"path": [
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET TRIGGERS IN PROB. STATE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"trigger.get\",\r\n    \"params\": {\r\n        \"output\": [\r\n            \"triggerid\",\r\n            \"description\",\r\n            \"priority\"\r\n        ],\r\n        \"filter\": {\r\n            \"value\": 1\r\n        },\r\n        \"sortfield\": \"priority\",\r\n        \"sortorder\": \"DESC\"\r\n    },\r\n    \"auth\": \"feddab2dfbf4d30b63b1383def84b6d1\",\r\n    \"id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zabbix.unitedlocating.net/api_jsonrpc.php",
+					"protocol": "https",
+					"host": [
+						"zabbix",
+						"unitedlocating",
+						"net"
+					],
+					"path": [
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET TRIGGER BY ID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jsonrpc\": \"2.0\",\r\n    \"method\": \"trigger.get\",\r\n    \"params\": {\r\n        \"triggerids\": \"14062\",\r\n        \"output\": \"extend\",\r\n        \"selectFunctions\": \"extend\"\r\n    },\r\n    \"auth\": \"feddab2dfbf4d30b63b1383def84b6d1\",\r\n    \"id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zabbix.unitedlocating.net/api_jsonrpc.php",
+					"protocol": "https",
+					"host": [
+						"zabbix",
+						"unitedlocating",
+						"net"
+					],
+					"path": [
+						"api_jsonrpc.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://api.unitedlocating.net:8460/api/requestToken?user=lchristian&pass=D28A3CCD8E7C9A1B4B3DB3C3DE270369",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.unitedlocating.net:8460/api/requestToken?user=lchristian&pass=D28A3CCD8E7C9A1B4B3DB3C3DE270369",
+					"protocol": "http",
+					"host": [
+						"api",
+						"unitedlocating",
+						"net"
+					],
+					"port": "8460",
+					"path": [
+						"api",
+						"requestToken"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "lchristian"
+						},
+						{
+							"key": "pass",
+							"value": "D28A3CCD8E7C9A1B4B3DB3C3DE270369"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10.0.0.246:8000/api/users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "10.0.0.246:8000/api/users",
+					"host": [
+						"10",
+						"0",
+						"0",
+						"246"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

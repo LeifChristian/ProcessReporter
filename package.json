@@ -1,57 +1,30 @@
 {
-  "name": "z1",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "axios": "^0.26.0",
-    "cookie-parser": "~1.4.4",
-    "cors": "^2.8.5",
-    "debug": "~2.6.9",
-    "dotenv": "^10.0.0",
-    "express": "~4.16.1",
-    "googleapis": "^39.2.0",
-    "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
-    "morgan": "~1.9.1",
-    "pm2": "^5.2.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
-    "twilio": "^3.74.0",
-    "twilio-cli": "^3.1.0",
-    "web-vitals": "^1.1.2"
-  },
+  "name": "pm2api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "nodemon backend/bin/www",
-    "client": "cd frontend && react-scripts start",
-    "server-with-client": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "concurrently": "^5.3.0"
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "fs": "0.0.1-security",
+    "googleapis": "^95.0.0",
+    "lodash": "^4.17.21",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
+    "ping": "^0.4.1",
+    "pm2": "^5.2.0",
+    "prompt": "^1.2.2",
+    "request": "^2.88.2",
+    "twilio": "^3.75.0",
+    "twilio-cli": "^3.4.1"
   }
 }

@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "bdcd6db5-9c82-4883-ad34-e90d56deca4c",
+		"name": "PM2_API - GET setup",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login / get all PM2 data",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "10.0.0.16:3800/pm2Auth?pass=b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
+					"host": [
+						"10",
+						"0",
+						"0",
+						"16"
+					],
+					"port": "3800",
+					"path": [
+						"pm2Auth"
+					],
+					"query": [
+						{
+							"key": "pass",
+							"value": "b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all processes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "10.0.0.16:3800/pm2GetProcess?password=b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
+					"host": [
+						"10",
+						"0",
+						"0",
+						"16"
+					],
+					"port": "3800",
+					"path": [
+						"pm2GetProcess"
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get stopped/errored processes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "10.0.0.174:3800/getStoppedProcess?password=b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
+					"host": [
+						"10",
+						"0",
+						"0",
+						"174"
+					],
+					"port": "3800",
+					"path": [
+						"getStoppedProcess"
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stop process by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "10.0.0.174:3800/stop/1?password=b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
+					"host": [
+						"10",
+						"0",
+						"0",
+						"174"
+					],
+					"port": "3800",
+					"path": [
+						"stop",
+						"1"
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Restart process by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "10.0.0.174:3800/restart/1?password=b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
+					"host": [
+						"10",
+						"0",
+						"0",
+						"174"
+					],
+					"port": "3800",
+					"path": [
+						"restart",
+						"1"
+					],
+					"query": [
+						{
+							"key": "password",
+							"value": "b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ping any server by IP/URL",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "10.0.0.16:3800/sendPingGeneric?server=www.google.com",
+					"host": [
+						"10",
+						"0",
+						"0",
+						"16"
+					],
+					"port": "3800",
+					"path": [
+						"sendPingGeneric"
+					],
+					"query": [
+						{
+							"key": "server",
+							"value": "www.google.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
