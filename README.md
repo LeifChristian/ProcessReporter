@@ -80,7 +80,7 @@ It's a simple auth system for dev purposes, any requests to these servers are re
 The PASSWORD environment variable is a simple hashed string (P@ssw0rd), and is accessed via ${process.env.PASSWORD}
 The same .env file lives on both the server and the local machine. If the passwords match, the route is triggered.
 
-The POST routes send "password": "b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342".
+The POST routes send a sha256 hash of "password": "b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342".
 The password is passed in the request body (P@ssw0rd with a SHA256 hash), and is stored in the .env file on both the local and remote machines.
 
 # /localhost-functions
