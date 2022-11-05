@@ -44,8 +44,6 @@ in the company postman collection.
 The current setup uses POST routes, though GET routes are included.
 See `.env variables` section for current param setup
 
-    **GET routes might need some updating to reflect recent updates**
-
 # ProcessReporter.js
 Autoresponder that monitors PM2 processes and reports if a process is stopped or errored. 
 Reporter is currently set up to send an email thru the Gmail API, when a new process is stopped or errored.
@@ -54,8 +52,7 @@ The Gmail API uses token.json and credentials.json to authenticate.
 The included "sendEmail" function is from Gmail's documentation, and currently sends text information about recently stopped or errored processes. 
 
 View documentation - https://developers.google.com/gmail/api/quickstart/nodejs
-
-** This could be easily adapted to use Microsoft email services**
+** This could be easily adapted to use any other email service**
 
 # pm2GetRemote.js
 Simple function that gets all pm2 data from a remote machine where server-POST.js is running. 
@@ -72,10 +69,12 @@ Handy little function that compares objects inside of arrays.
 # findDuplicateObjectInArray.js
 Find duplicate objects within the same array.
 
-# .env Variable
+# .env Variables
+
+add Twilio Sid and auth token to .env variables in frontend directory, and backend directories.
 
 The .env file contains hard coded strings which correspond to route params.
-It's a simple auth system for dev purposes, any requests to these servers are rejected outside of the company VPN.
+It's a simple auth system for dev purposes.
 
 The PASSWORD environment variable is a simple hashed string (P@ssw0rd), and is accessed via ${process.env.PASSWORD}
 The same .env file lives on both the server and the local machine. If the passwords match, the route is triggered.
@@ -88,7 +87,7 @@ Functions in this directory trigger routes on the same machine
 
 # /remote-functions
 Functions in this directory trigger routes remotely (from a separate machine). 
-Currently using dev server at 10.0.0.174.
+
 
 # Twilio API
 Twilio API is included with this build, though currently unused. Easily send text or voice notifications. Just add your account SID and token in the .env file. 
