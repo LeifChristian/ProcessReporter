@@ -23,7 +23,7 @@
 					}
 				},
 				"url": {
-					"raw": "10.0.0.16:3800/pm2Auth?pass=b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
+					"raw": "yourserver:3800/pm2Auth?pass=b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
 					"host": [
 						"10",
 						"0",
@@ -50,7 +50,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "10.0.0.16:3800/pm2GetProcess?password=b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
+					"raw": "yourserver:3800/pm2GetProcess?password=b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
 					"host": [
 						"10",
 						"0",
@@ -84,7 +84,7 @@
 					"urlencoded": []
 				},
 				"url": {
-					"raw": "10.0.0.174:3800/getStoppedProcess?password=b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
+					"raw": "yourserver:3800/getStoppedProcess?password=b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
 					"host": [
 						"10",
 						"0",
@@ -111,7 +111,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "10.0.0.174:3800/stop/1?password=b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
+					"raw": "yourserver:3800/stop/1?password=b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
 					"host": [
 						"10",
 						"0",
@@ -139,7 +139,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "10.0.0.174:3800/restart/1?password=b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
+					"raw": "yourserver:3800/restart/1?password=b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342",
 					"host": [
 						"10",
 						"0",
@@ -167,7 +167,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "10.0.0.16:3800/sendPingGeneric?server=www.google.com",
+					"raw": "yourserver:3800/sendPingGeneric?server=www.google.com",
 					"host": [
 						"10",
 						"0",
