@@ -101,8 +101,8 @@ const authToken = process.env.MY_TOKEN
 Create a voice call with:
 client.calls.create({
   twiml: `<Response><Pause length="1"/><Say voice="woman"> ${message}</Say></Response>`,
-  to: "+14065390742",
-  from: "+14062154416",
+  to: "+15555555",
+  from: "+555555555",
 })
 .then((call) => console.log(call.sid));
 
@@ -110,7 +110,7 @@ Create a text message with:
 client.messages
 .create({
     body: message,
-    messagingServiceSid: "MG6a6e4c67fd4bc51cec5f8e1223cad360",
+    messagingServiceSid: "",
     to: "+14065390742",
 })
 .then((message) => console.log(message.sid))
