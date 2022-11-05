@@ -19,8 +19,7 @@ Can be started as a Pm2 process, but triggering the stop route via the API will 
 
 Routes are served on port 3800, all routes are contained within server-POST.js
 
-`PM2_API - POST setup.json` contains the postman routes collection. Routes live online 
-in the company postman collection.
+`PM2_API - POST setup.json` contains the postman routes collection. 
 
 # Functionality:
 
